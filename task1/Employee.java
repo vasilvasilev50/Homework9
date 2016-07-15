@@ -18,41 +18,35 @@ public class Employee {
 		this.hoursLeft = HOURS_FOR_WORK_PER_DAY;
 	}
 
-	void work() {
-		while (this.hoursLeft != 0 || !this.allWork.isAllWorkDone()) {
-			this.currentTask = allWork.getNextTask();
-			if (this.hoursLeft >= this.currentTask.getWorkingHours()) {
-				this.hoursLeft -= this.currentTask.getWorkingHours();
-				this.currentTask.setWorkingHours(0);
+	void work(AllWork allWork) {
+		if (allWork != null) {
+			this.allWork = allWork;
+			while (this.hoursLeft != 0 && !this.allWork.isAllWorkDone()) {
+				if (allWork.getNextTask() != null) {
+					this.currentTask = allWork.getNextTask();
+					this.showReport();
+					if (this.hoursLeft >= this.currentTask.getWorkingHours()) {
+						this.hoursLeft -= this.currentTask.getWorkingHours();
+						this.currentTask.setWorkingHours(0);
+						System.out.println("	Zadachata: " + this.currentTask.getName() + " e zavyrshena!");
 
-			} else {
-				this.currentTask.setWorkingHours(this.currentTask.getWorkingHours() - this.hoursLeft);
-				this.hoursLeft = 0;
+					} else {
+						this.currentTask.setWorkingHours(this.currentTask.getWorkingHours() - this.hoursLeft);
+						this.hoursLeft = 0;
+					}
+				}
 			}
-			this.showReport();
 		}
 	}
 
 	private void showReport() {
-		System.out.println("Rabotnik: " + this.name);
-		System.out.println("Zadacha: " + this.currentTask.getName());
-		System.out.print("Rabotnika ima oshte " + this.hoursLeft + " v koito moje da raboti.");
-		if (this.hoursLeft > 0) {
-			System.out.print(" Daite na " + this.name + " oshte rabota!");
-		}
-		System.out.println();
-		System.out.println(
-				"Ostavat " + this.currentTask.getWorkingHours() + " rabotni chasa dokato se zavarshi zadachata.");
+		System.out.println(this.name + " zapochva da raboti po: " + this.currentTask.getName());
+		
 	}
 
 	public Task getCurrentTask() {
 		return currentTask;
 	}
-
-	// public void setCurrentTask(Task currentTask) {
-	// if (currentTask != null)
-	// this.currentTask = currentTask;
-	// }
 
 	public float getHoursLeft() {
 		return hoursLeft;

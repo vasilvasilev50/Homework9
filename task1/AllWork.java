@@ -25,8 +25,10 @@ public class AllWork {
 	
 	Task getNextTask () {
 		for (Task task : tasks){
-			if (task != null && task.getWorkingHours() > 0) {
-				return task;
+			if (task != null) {
+				if (task.getWorkingHours() > 0) {
+					return task;
+				}
 			}
 		}
 		return null;
@@ -34,8 +36,10 @@ public class AllWork {
 	
 	boolean isAllWorkDone () {
 		for (Task task : tasks){
-			if (task.getWorkingHours() != 0){
-				return false;
+			if (task != null){
+				if (task.getWorkingHours() != 0){
+					return false;
+				}
 			}
 		}
 		return true;
