@@ -6,6 +6,7 @@ public class AllWork {
 	private Task[] tasks;
 	private int freePlacesForTasks;
 	private int correntUnassignedTask;
+	
 
 	AllWork() {
 		freePlacesForTasks = ALL_PLACES_FOR_TASTKS;
@@ -14,9 +15,8 @@ public class AllWork {
 
 	void addTask(Task task) {
 		if (task != null) {
-			if (correntUnassignedTask < ALL_PLACES_FOR_TASTKS && this.tasks[correntUnassignedTask] == null) {
-			this.tasks[correntUnassignedTask++] = task;
-			freePlacesForTasks--;
+			if (freePlacesForTasks > 0 && this.tasks[ALL_PLACES_FOR_TASTKS - freePlacesForTasks] == null) {
+			this.tasks[ALL_PLACES_FOR_TASTKS - freePlacesForTasks--] = task;
 			return;
 			}
 			System.out.println("No more free places for tasks!");
@@ -24,12 +24,8 @@ public class AllWork {
 	}
 	
 	Task getNextTask () {
-		for (Task task : tasks){
-			if (task != null) {
-				if (task.getWorkingHours() > 0) {
-					return task;
-				}
-			}
+		if (correntUnassignedTask < tasks.length){
+			return tasks[correntUnassignedTask];
 		}
 		return null;
 	}
@@ -40,9 +36,18 @@ public class AllWork {
 				if (task.getWorkingHours() != 0){
 					return false;
 				}
-			}
+			} 
 		}
 		return true;
+	}
+	
+	
+	public int getCorrentUnassignedTask() {
+		return correntUnassignedTask;
+	}
+
+	public void setCorrentUnassignedTask() {
+		this.correntUnassignedTask++;
 	}
 
 }

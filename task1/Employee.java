@@ -21,27 +21,40 @@ public class Employee {
 	void work(AllWork allWork) {
 		if (allWork != null) {
 			this.allWork = allWork;
-			while (this.hoursLeft != 0 && !this.allWork.isAllWorkDone()) {
-				if (allWork.getNextTask() != null) {
-					this.currentTask = allWork.getNextTask();
+			while (this.hoursLeft != 0) {
+				if (this.currentTask != null && this.currentTask.getWorkingHours() > 0) {
 					this.showReport();
-					if (this.hoursLeft >= this.currentTask.getWorkingHours()) {
-						this.hoursLeft -= this.currentTask.getWorkingHours();
-						this.currentTask.setWorkingHours(0);
-						System.out.println("	Zadachata: " + this.currentTask.getName() + " e zavyrshena!");
-
+					workForOneDay();
+				} else {
+					if (allWork.getNextTask() != null) {
+						this.currentTask = allWork.getNextTask();
+						allWork.setCorrentUnassignedTask();
+						this.showReport();
+						workForOneDay();
 					} else {
-						this.currentTask.setWorkingHours(this.currentTask.getWorkingHours() - this.hoursLeft);
-						this.hoursLeft = 0;
+						return;
 					}
+
 				}
 			}
 		}
 	}
 
+	private void workForOneDay() {
+		if (this.hoursLeft >= this.currentTask.getWorkingHours()) {
+			this.hoursLeft -= this.currentTask.getWorkingHours();
+			this.currentTask.setWorkingHours(0);
+			System.out.println("	" + this.currentTask.getName() + " is finished!");
+
+		} else {
+			this.currentTask.setWorkingHours(this.currentTask.getWorkingHours() - this.hoursLeft);
+			this.hoursLeft = 0;
+		}
+	}
+
 	private void showReport() {
-		System.out.println(this.name + " zapochva da raboti po: " + this.currentTask.getName());
-		
+		System.out.println(this.name + " work on: " + this.currentTask.getName());
+
 	}
 
 	public Task getCurrentTask() {

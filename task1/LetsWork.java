@@ -5,17 +5,17 @@ public class LetsWork {
 	public static void main(String[] args) {
 		
 		AllWork allWork = new AllWork();
-		allWork.addTask(new Task("izkopavane na dupka za osnovi", 30));
-		allWork.addTask(new Task("byrkane na ciment", 12));
-		allWork.addTask(new Task("nalivane na osnovi", 18));
-		allWork.addTask(new Task("izlivane na koloni za pyrviqt etaj", 8));
-		allWork.addTask(new Task("izlivane na plocha za pyrviqt etaj", 10));
-		allWork.addTask(new Task("izlivane na koloni za vtoriqt etaj", 8));
-		allWork.addTask(new Task("izlivane na plocha za vtoriqt etaj", 10));
-		allWork.addTask(new Task("postavqne na tuhli", 24));
-		allWork.addTask(new Task("pokrivna kontrukciq", 48));
-		allWork.addTask(new Task("postavqne na prozorci", 13));
-		allWork.addTask(new Task("izmazvane na stenite", 16));
+		allWork.addTask(new Task("Task 1", 30));
+		allWork.addTask(new Task("Task 2", 12));
+		allWork.addTask(new Task("Task 3", 18));
+		allWork.addTask(new Task("Task 4", 4));
+		allWork.addTask(new Task("Task 5", 10));
+		allWork.addTask(new Task("Task 6", 8));
+		allWork.addTask(new Task("Task 7", 10));
+		allWork.addTask(new Task("Task 8", 24));
+		allWork.addTask(new Task("Task 9", 48));
+		allWork.addTask(new Task("Task 10", 13));
+		allWork.addTask(new Task("Task 11", 16));
 		
 		
 		Personal personal = new Personal(10);
@@ -39,7 +39,7 @@ public class LetsWork {
 			if (!allWork.isAllWorkDone()){
 				System.out.println("Rabotniqt den prikliuchi.");
 			} else {
-				System.out.println("Vsichki zadachi sa izpylneni!!! Slagaite trapezata i da se pochvame :) ");
+				System.out.println("All tasks are finished!!! Slagaite trapezata i da se pochvame :) ");
 			}
 		}
 
