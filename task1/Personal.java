@@ -1,6 +1,6 @@
 package task1;
 
-public class Personal {
+public class Personal implements IPersonal{
 	
 	private static final int MIN_EMPLOYESS = 2;
 	private static final int MAX_EMPLUYESS = 20;
@@ -16,15 +16,17 @@ public class Personal {
 		}
 	}
 	
-	public void addPersonal (Employee employee) {
+	@Override
+	public void addPersonal (IWork employee) {
 		if (employee != null && currentEmployee < this.getEmployees().length) {
-			this.employees[currentEmployee++] = employee;
+			this.employees[currentEmployee++] = (Employee) employee;
 		} else {
 			System.out.println("No more place for employees");
 		}
 	}
 	
 	
+//	getters and setters
 	public Employee[] getEmployees() {
 		return employees;
 	}

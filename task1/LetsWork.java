@@ -4,7 +4,7 @@ public class LetsWork {
 
 	public static void main(String[] args) {
 		
-		AllWork allWork = new AllWork();
+		Workable allWork = new AllWork();
 		allWork.addTask(new Task("Task 1", 30));
 		allWork.addTask(new Task("Task 2", 12));
 		allWork.addTask(new Task("Task 3", 18));
@@ -18,7 +18,7 @@ public class LetsWork {
 		allWork.addTask(new Task("Task 11", 16));
 		
 		
-		Personal personal = new Personal(10);
+		IPersonal personal = new Personal(5);
 		personal.addPersonal(new Employee("Pesho"));
 		personal.addPersonal(new Employee("Gosho"));
 		personal.addPersonal(new Employee("Misho"));
@@ -30,14 +30,14 @@ public class LetsWork {
 		while (!allWork.isAllWorkDone()) {
 			System.out.println();
 			System.out.println("Working day " + workingDay++);	
-			for (Employee employee : personal.getEmployees()){
+			for (IWork employee : ((Personal) personal).getEmployees()){
 				if (employee != null){
 					employee.startWorkingDay();
 					employee.work(allWork);
 				}
 			}
 			if (!allWork.isAllWorkDone()){
-				System.out.println("Rabotniqt den prikliuchi.");
+				System.out.println("  The working day is over.");
 			} else {
 				System.out.println("All tasks are finished!!! Slagaite trapezata i da se pochvame :) ");
 			}

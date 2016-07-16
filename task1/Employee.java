@@ -1,6 +1,6 @@
 package task1;
 
-public class Employee {
+public class Employee implements IWork  {
 
 	private static final int HOURS_FOR_WORK_PER_DAY = 8;
 	private String name;
@@ -13,24 +13,26 @@ public class Employee {
 			this.name = name;
 		}
 	}
-
-	void startWorkingDay() {
+	
+	@Override
+	public void startWorkingDay() {
 		this.hoursLeft = HOURS_FOR_WORK_PER_DAY;
 	}
 
-	void work(AllWork allWork) {
+	@Override
+	public void work (Workable allWork) {
 		if (allWork != null) {
-			this.allWork = allWork;
+			this.allWork = (AllWork) allWork;
 			while (this.hoursLeft != 0) {
 				if (this.currentTask != null && this.currentTask.getWorkingHours() > 0) {
 					this.showReport();
-					workForOneDay();
+					calculateHoursLeft();
 				} else {
-					if (allWork.getNextTask() != null) {
-						this.currentTask = allWork.getNextTask();
-						allWork.setCorrentUnassignedTask();
+					if (((AllWork) allWork).getNextTask() != null) {
+						this.currentTask = ((AllWork) allWork).getNextTask();
+						((AllWork) allWork).setCorrentUnassignedTask();
 						this.showReport();
-						workForOneDay();
+						calculateHoursLeft();
 					} else {
 						return;
 					}
@@ -40,7 +42,7 @@ public class Employee {
 		}
 	}
 
-	private void workForOneDay() {
+	private void calculateHoursLeft() {
 		if (this.hoursLeft >= this.currentTask.getWorkingHours()) {
 			this.hoursLeft -= this.currentTask.getWorkingHours();
 			this.currentTask.setWorkingHours(0);
@@ -53,10 +55,12 @@ public class Employee {
 	}
 
 	private void showReport() {
-		System.out.println(this.name + " work on: " + this.currentTask.getName());
+		System.out.println(this.name + " work on: " + this.currentTask.getName() + " (remain " + this.currentTask.getWorkingHours() + " hours)");
 
 	}
 
+	
+//	getters and setters
 	public Task getCurrentTask() {
 		return currentTask;
 	}
@@ -72,5 +76,6 @@ public class Employee {
 	public String getName() {
 		return name;
 	}
+
 
 }

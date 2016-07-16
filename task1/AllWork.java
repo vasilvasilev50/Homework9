@@ -1,6 +1,6 @@
 package task1;
 
-public class AllWork {
+public class AllWork implements Workable{
 
 	private static final int ALL_PLACES_FOR_TASTKS = 10;
 	private Task[] tasks;
@@ -12,8 +12,9 @@ public class AllWork {
 		freePlacesForTasks = ALL_PLACES_FOR_TASTKS;
 		tasks = new Task [ALL_PLACES_FOR_TASTKS];
 	}
-
-	void addTask(Task task) {
+	
+	@Override
+	public void addTask(Task task) {
 		if (task != null) {
 			if (freePlacesForTasks > 0 && this.tasks[ALL_PLACES_FOR_TASTKS - freePlacesForTasks] == null) {
 			this.tasks[ALL_PLACES_FOR_TASTKS - freePlacesForTasks--] = task;
@@ -23,14 +24,9 @@ public class AllWork {
 		}
 	}
 	
-	Task getNextTask () {
-		if (correntUnassignedTask < tasks.length){
-			return tasks[correntUnassignedTask];
-		}
-		return null;
-	}
 	
-	boolean isAllWorkDone () {
+	@Override
+	public boolean isAllWorkDone () {
 		for (Task task : tasks){
 			if (task != null){
 				if (task.getWorkingHours() != 0){
@@ -41,7 +37,15 @@ public class AllWork {
 		return true;
 	}
 	
+	Task getNextTask () {
+		if (correntUnassignedTask < tasks.length){
+			return tasks[correntUnassignedTask];
+		}
+		return null;
+	}
 	
+	
+//	getters and setters
 	public int getCorrentUnassignedTask() {
 		return correntUnassignedTask;
 	}

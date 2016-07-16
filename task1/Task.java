@@ -12,6 +12,8 @@ public class Task {
 		this.workingHours = (workingHours > 0 ) ? workingHours : 0;
 	}
 
+	
+//	getters and setters
 	public String getName() {
 		return name;
 	}
@@ -24,7 +26,5 @@ public class Task {
 		if (workingHours >= 0)
 		this.workingHours = workingHours;
 	}
-	
-	
 
 }
