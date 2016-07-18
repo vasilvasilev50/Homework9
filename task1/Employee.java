@@ -1,12 +1,14 @@
 package task1;
 
-public class Employee implements IWork  {
+public class Employee {
 
 	private static final int HOURS_FOR_WORK_PER_DAY = 8;
+	
 	private String name;
 	private Task currentTask;
 	private float hoursLeft;
 	private AllWork allWork;
+
 
 	Employee(String name) {
 		if (name != null && !name.equals("")) {
@@ -14,15 +16,12 @@ public class Employee implements IWork  {
 		}
 	}
 	
-	@Override
 	public void startWorkingDay() {
 		this.hoursLeft = HOURS_FOR_WORK_PER_DAY;
 	}
 
-	@Override
-	public void work (Workable allWork) {
-		if (allWork != null) {
-			this.allWork = (AllWork) allWork;
+	public void work () {
+		if (this.allWork != null) {
 			while (this.hoursLeft != 0) {
 				if (this.currentTask != null && this.currentTask.getWorkingHours() > 0) {
 					this.showReport();
@@ -34,6 +33,7 @@ public class Employee implements IWork  {
 						this.showReport();
 						calculateHoursLeft();
 					} else {
+						System.out.println(this.getName() + ": Nqma rabota za men, mislq da si hodq.....");
 						return;
 					}
 
@@ -64,17 +64,17 @@ public class Employee implements IWork  {
 	public Task getCurrentTask() {
 		return currentTask;
 	}
-
 	public float getHoursLeft() {
 		return hoursLeft;
 	}
-
 	public void setHoursLeft(float hoursLeft) {
 		this.hoursLeft = (hoursLeft > 0) ? hoursLeft : 0;
 	}
-
 	public String getName() {
 		return name;
+	}
+	public void setAllWork(AllWork allWork) {
+		this.allWork = (allWork != null) ? allWork : null;
 	}
 
 

@@ -1,6 +1,6 @@
 package task1;
 
-public class AllWork implements Workable{
+public class AllWork {
 
 	private static final int ALL_PLACES_FOR_TASTKS = 10;
 	private Task[] tasks;
@@ -13,7 +13,6 @@ public class AllWork implements Workable{
 		tasks = new Task [ALL_PLACES_FOR_TASTKS];
 	}
 	
-	@Override
 	public void addTask(Task task) {
 		if (task != null) {
 			if (freePlacesForTasks > 0 && this.tasks[ALL_PLACES_FOR_TASTKS - freePlacesForTasks] == null) {
@@ -24,8 +23,6 @@ public class AllWork implements Workable{
 		}
 	}
 	
-	
-	@Override
 	public boolean isAllWorkDone () {
 		for (Task task : tasks){
 			if (task != null){
@@ -46,10 +43,6 @@ public class AllWork implements Workable{
 	
 	
 //	getters and setters
-	public int getCorrentUnassignedTask() {
-		return correntUnassignedTask;
-	}
-
 	public void setCorrentUnassignedTask() {
 		this.correntUnassignedTask++;
 	}

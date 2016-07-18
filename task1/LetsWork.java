@@ -4,7 +4,8 @@ public class LetsWork {
 
 	public static void main(String[] args) {
 		
-		Workable allWork = new AllWork();
+		AllWork allWork = new AllWork();
+		
 		allWork.addTask(new Task("Task 1", 30));
 		allWork.addTask(new Task("Task 2", 12));
 		allWork.addTask(new Task("Task 3", 18));
@@ -17,23 +18,21 @@ public class LetsWork {
 		allWork.addTask(new Task("Task 10", 13));
 		allWork.addTask(new Task("Task 11", 16));
 		
+		Employee [] employees = {new Employee("Pesho"), new Employee("Gosho"), new Employee("Misho"), 
+								new Employee("Grisho"), new Employee("Tisho")};
 		
-		IPersonal personal = new Personal(5);
-		personal.addPersonal(new Employee("Pesho"));
-		personal.addPersonal(new Employee("Gosho"));
-		personal.addPersonal(new Employee("Misho"));
-		personal.addPersonal(new Employee("Grisho"));
-		personal.addPersonal(new Employee("Tisho"));
+		
 		
 		
 		int workingDay = 1;
 		while (!allWork.isAllWorkDone()) {
 			System.out.println();
 			System.out.println("Working day " + workingDay++);	
-			for (IWork employee : ((Personal) personal).getEmployees()){
+			for (Employee employee : employees){
 				if (employee != null){
 					employee.startWorkingDay();
-					employee.work(allWork);
+					employee.setAllWork(allWork);
+					employee.work();
 				}
 			}
 			if (!allWork.isAllWorkDone()){
